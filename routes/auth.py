@@ -34,7 +34,9 @@ def login_submit():
 
     session["user"] = public_user_session(user)
     flash("Sesion iniciada.", "success")
-    return redirect("/catalogo")
+
+    next_url = request.args.get("next") or "/catalogo"
+    return redirect(next_url)
 
 
 @auth_bp.get("/register")
@@ -82,7 +84,9 @@ def register_submit():
 
     session["user"] = public_user_session(user)
     flash("Cuenta creada y sesion iniciada.", "success")
-    return redirect("/catalogo")
+
+    next_url = request.args.get("next") or "/catalogo"
+    return redirect(next_url)
 
 
 @auth_bp.get("/logout")

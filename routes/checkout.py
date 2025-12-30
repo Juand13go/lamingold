@@ -1,18 +1,22 @@
 from flask import Blueprint, render_template, request, redirect, session
 from services.order_service import create_order_from_cart
 from services.cart_service import totals, clear_cart, get_cart
+from routes.auth_guard import login_required
 
 checkout_bp = Blueprint("checkout", __name__)
 
 @checkout_bp.get("/checkout")
+@login_required
 def checkout_page():
     cart = get_cart()
     if not cart or len(cart) == 0:
         return redirect("/carrito")
+
     t = totals()
     return render_template("checkout.html", totals=t)
 
 @checkout_bp.post("/checkout")
+@login_required
 def checkout_submit():
     data = {
         "full_name": request.form.get("full_name", ""),
@@ -23,7 +27,7 @@ def checkout_submit():
         "notes": request.form.get("notes", ""),
     }
 
-    # ✅ PASAMOS session_user para no crear users duplicados si ya existe
+    # Pasamos session_user para asociar el pedido al usuario logueado
     result = create_order_from_cart(data, session.get("user"))
 
     # vaciamos carrito al confirmar
