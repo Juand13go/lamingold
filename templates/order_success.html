@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Pedido confirmado - Lamin Gold{% endblock %}
+
+{% block content %}
+<section class="container">
+  <h1 class="page-title">Pedido confirmado</h1>
+  <p class="page-subtitle">Tu pedido fue generado correctamente.</p>
+
+  <div class="summary-box">
+    <div class="row">
+      <span>Codigo de pedido</span>
+      <strong>{{ order_id }}</strong>
+    </div>
+  </div>
+
+  <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+    <a class="btn" href="{{ wa_url }}" target="_blank">Enviar por WhatsApp</a>
+    <a class="btn-outline" href="/catalogo">Seguir comprando</a>
+  </div>
+</section>
+{% endblock %}

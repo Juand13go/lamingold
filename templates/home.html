@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block title %}Home - Lamin Gold{% endblock %}
+
+{% block content %}
+<section class="container main">
+
+  <!-- HERO -->
+  <div class="summary-box" style="padding:22px; overflow:hidden;">
+    <div style="display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:center;">
+      <div>
+        <div class="badge" style="width:max-content;">Oro laminado premium</div>
+        <h1 class="page-title" style="margin:10px 0 8px; line-height:1.05;">
+          Lamin Gold
+        </h1>
+        <p class="page-subtitle" style="max-width:520px; margin:0 0 14px;">
+          Joyeria elegante, resistente y lista para regalo. Compra por categoria o explora el catalogo completo.
+        </p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="/catalogo" style="padding:12px 16px;">Ver catalogo</a>
+          <a class="btn-outline" href="/categoria/pulseras" style="padding:12px 16px;">Ver pulseras</a>
+        </div>
+
+        <div class="muted" style="margin-top:12px; display:flex; gap:16px; flex-wrap:wrap;">
+          <span>• Envios rapidos</span>
+          <span>• Pagas por WhatsApp</span>
+          <span>• Calidad premium</span>
+        </div>
+      </div>
+
+      <!-- Imagen/placeholder visual -->
+      <div class="card-media" style="border-radius:18px; height:210px;">
+        <img
+          class="card-img"
+          src="/static/img/foto_home.avif"
+          alt="Lamin Gold"
+          style="object-fit:cover;"
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIAS (cards) -->
+  <div style="margin-top:18px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+      <div>
+        <div style="font-weight:900; font-size:18px;">Comprar por categoria</div>
+        <div class="muted">Elige rapido lo que buscas.</div>
+      </div>
+      <a class="btn-outline" href="/catalogo">Ver todo</a>
+    </div>
+
+    <div class="grid" style="margin-top:12px; grid-template-columns: repeat(4, minmax(0,1fr));">
+      <!-- Pulseras -->
+      <a href="/categoria/pulseras" class="card" style="text-decoration:none;">
+        <div class="card-body">
+          <div class="badge">Categoria</div>
+          <div style="font-weight:900; font-size:18px; margin-top:6px;">Pulseras</div>
+          <div class="muted" style="margin-top:6px;">Clasicas, tejidas y premium.</div>
+          <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+            <span class="muted">Explorar</span>
+            <span style="font-weight:900;">→</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Cadenas -->
+      <a href="/categoria/cadenas" class="card" style="text-decoration:none;">
+        <div class="card-body">
+          <div class="badge">Categoria</div>
+          <div style="font-weight:900; font-size:18px; margin-top:6px;">Cadenas</div>
+          <div class="muted" style="margin-top:6px;">Sobrias, modernas y elegantes.</div>
+          <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+            <span class="muted">Explorar</span>
+            <span style="font-weight:900;">→</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Anillos -->
+      <a href="/categoria/anillos" class="card" style="text-decoration:none;">
+        <div class="card-body">
+          <div class="badge">Categoria</div>
+          <div style="font-weight:900; font-size:18px; margin-top:6px;">Anillos</div>
+          <div class="muted" style="margin-top:6px;">Brillo y estilo para destacar.</div>
+          <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+            <span class="muted">Explorar</span>
+            <span style="font-weight:900;">→</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Aretes -->
+      <a href="/categoria/aretes" class="card" style="text-decoration:none;">
+        <div class="card-body">
+          <div class="badge">Categoria</div>
+          <div style="font-weight:900; font-size:18px; margin-top:6px;">Aretes</div>
+          <div class="muted" style="margin-top:6px;">Minimalistas y delicados.</div>
+          <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+            <span class="muted">Explorar</span>
+            <span style="font-weight:900;">→</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- PREVIEWS POR CATEGORIA -->
+  {% if products_by_cat %}
+    {% for c, prods in products_by_cat.items() %}
+      <div style="margin-top:26px;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <div>
+            <h2 style="margin:0; font-size:22px; text-transform:capitalize;">{{ c }}</h2>
+            <div class="muted">Destacados de esta categoria.</div>
+          </div>
+          <a class="btn-outline" href="/categoria/{{ c|replace(' ','-') }}">Ver mas</a>
+        </div>
+
+        {% if prods and prods|length > 0 %}
+          <div class="grid" style="margin-top:12px;">
+            {% for p in prods %}
+              <article class="card">
+
+                {% if p.get("image_url") %}
+                  <div class="card-media">
+                    <img class="card-img" src="{{ p.get('image_url') }}" alt="{{ p.get('name','Producto') }}">
+                  </div>
+                {% else %}
+                  <div class="card-media card-media--empty">
+                    <div style="opacity:.7; font-weight:900;">SIN FOTO</div>
+                  </div>
+                {% endif %}
+
+                <div class="card-body">
+                  <div class="badge">{{ p.get("category","") }}</div>
+
+                  <h3 class="card-title">{{ p.get("name","Producto") }}</h3>
+
+                  {% if p.get("description") %}
+                    <p class="card-desc">{{ p.get("description","") }}</p>
+                  {% else %}
+                    <p class="card-desc" style="opacity:.7;">Sin descripcion por ahora.</p>
+                  {% endif %}
+
+                  <div class="card-meta">
+                    <span>Color: {{ p.get("color","Dorado") }}</span>
+                    <span>Baño: {{ p.get("gold_type","18k") }}</span>
+                  </div>
+
+                  <div class="card-bottom">
+                    <strong class="price">$ {{ "%.0f"|format(p.get("base_price",0)) }}</strong>
+                    <a class="btn-outline" href="/producto/{{ p.get('$id') }}">Ver</a>
+                  </div>
+
+                  <form method="POST" action="/carrito/agregar" class="add-to-cart">
+                    <input type="hidden" name="product_id" value="{{ p.get('$id') }}">
+                    <input type="hidden" name="name" value="{{ p.get('name','Producto') }}">
+                    <input type="hidden" name="unit_price" value="{{ p.get('base_price',0) }}">
+                    <input type="hidden" name="image_url" value="{{ p.get('image_url', '') }}">
+                    <input type="hidden" name="qty" value="1">
+                    <button class="btn" type="submit">Agregar al carrito</button>
+                  </form>
+                </div>
+
+              </article>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="summary-box" style="margin-top:12px;">
+            <strong>Aun no hay productos en {{ c }}.</strong>
+            <div class="muted" style="margin-top:6px;">Agrega productos desde el panel de admin.</div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+</section>
+{% endblock %}

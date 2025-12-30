@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Admin - Lamin Gold{% endblock %}
+
+{% block content %}
+<section class="container main">
+  <h1 class="page-title">Panel Administrador</h1>
+  <p class="page-subtitle">Gestion de productos y pedidos.</p>
+
+  <div class="cart__items">
+    <div class="cart__item" style="grid-template-columns: 1fr auto;">
+      <div>
+        <div style="font-weight:900; font-size:18px;">Productos</div>
+        <div class="muted">Crear, revisar y organizar el catalogo</div>
+      </div>
+      <a class="btn-outline" href="/admin/products">Gestionar</a>
+    </div>
+
+    <div class="cart__item" style="grid-template-columns: 1fr auto;">
+      <div>
+        <div style="font-weight:900; font-size:18px;">Pedidos</div>
+        <div class="muted">Ver pedidos y hacer seguimiento</div>
+      </div>
+      <a class="btn-outline" href="/admin/orders">Ver pedidos</a>
+    </div>
+
+    <div class="cart__item" style="grid-template-columns: 1fr auto;">
+      <div>
+        <div style="font-weight:900; font-size:18px;">Volver al catalogo</div>
+        <div class="muted">Ir a la tienda como cliente</div>
+      </div>
+      <a class="btn-outline" href="/catalogo">Ir a tienda</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

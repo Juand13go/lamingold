@@ -1,0 +1,1206 @@
+/* ================================
+   LAMIN GOLD – CLEAN PREMIUM CSS
+   LIGHT MODE (COMPLETO)
+   (Compat: topbar/navbar, cart-icon/cartbtn, etc.)
+   ================================ */
+
+/* ---------- Variables ---------- */
+:root{
+  --bg:#FFFFFF;
+  --gold:#D4AF37;
+  --ivory:#0B0B0B;
+  --muted:#F0F0F0;
+
+  --border-gold-12: rgba(212,175,55,.12);
+  --border-gold-18: rgba(212,175,55,.18);
+  --border-gold-20: rgba(212,175,55,.20);
+  --border-gold-25: rgba(212,175,55,.25);
+  --border-gold-35: rgba(212,175,55,.35);
+  --border-gold-38: rgba(212,175,55,.38);
+  --border-gold-45: rgba(212,175,55,.45);
+
+  --text-55: rgba(11,11,11,.55);
+  --text-60: rgba(11,11,11,.60);
+  --text-72: rgba(11,11,11,.72);
+  --text-78: rgba(11,11,11,.78);
+  --text-85: rgba(11,11,11,.85);
+  --text-90: rgba(11,11,11,.90);
+
+  --surface-10: rgba(212,175,55,.12);
+  --surface-25: rgba(0,0,0,.04);
+  --surface-30: rgba(0,0,0,.06);
+  --surface-40: rgba(0,0,0,.07);
+  --surface-42: rgba(0,0,0,.10);
+  --surface-45: rgba(0,0,0,.05);
+  --surface-55: rgba(0,0,0,.12);
+
+  --panel-grad: linear-gradient(180deg, #FFFFFF, #FAFAFA);
+  --panel-grad-soft: linear-gradient(180deg, #FFFFFF, #F7F7F7);
+
+  --line-soft: rgba(0,0,0,.08);
+
+  --r12: 12px;
+  --r14: 14px;
+  --r16: 16px;
+  --r18: 18px;
+
+  --shadow-soft: 0 10px 30px rgba(0,0,0,.08);
+
+  --danger-bg: rgba(255, 65, 65, .10);
+  --danger-text: #b61f1f;
+  --danger-border: rgba(182, 31, 31, .25);
+
+  --badge-border: rgba(255,255,255,.92);
+}
+
+/* ---------- Reset ---------- */
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--ivory);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* ---------- Layout ---------- */
+.container,
+.topbar-inner,
+.footer-inner,
+.navbar__inner{
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+.main{ padding: 26px 0 40px; }
+
+/* ---------- Typography ---------- */
+.page-title,
+.catalog-header h1{
+  margin: 0 0 6px;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+}
+
+.page-subtitle,
+.catalog-header p{
+  margin: 0 0 18px;
+  color: var(--text-72);
+}
+
+.catalog-header p{ margin-bottom: 22px; }
+
+/* ---------- Grid ---------- */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(1, minmax(0,1fr));
+  gap: 14px;
+}
+@media (min-width: 640px){
+  .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (min-width: 960px){
+  .grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+
+/* =========================
+   NAVBAR / TOPBAR (compat)
+   ========================= */
+.topbar,
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255,255,255,.92);
+  border-bottom: 1px solid var(--border-gold-18);
+  backdrop-filter: blur(10px);
+}
+
+.topbar-inner,
+.navbar__inner{
+  padding: 14px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+}
+
+/* brand (compat) */
+.brand,
+.navbar__brand{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  text-decoration:none;
+  color: var(--ivory);
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+.brand span{ color: var(--gold); }
+
+/* logo + texts (compat) */
+.brand-logo{ display:flex; align-items:center; gap: 12px; }
+.brand-img,
+.navbar__logo{
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r12);
+  object-fit: cover;
+  border: 1px solid var(--border-gold-25);
+  box-shadow: var(--shadow-soft);
+}
+.brand-text,
+.navbar__brandtext{
+  display:flex;
+  flex-direction:column;
+  line-height: 1.1;
+}
+.brand-title,
+.navbar__title{
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: .08em;
+}
+.brand-sub,
+.navbar__subtitle{
+  font-size: 12px;
+  opacity: .75;
+  margin-top: 3px;
+}
+
+/* links (compat) */
+.nav,
+.navbar__links{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.nav a{
+  color: var(--text-85);
+  text-decoration:none;
+  font-weight: 600;
+  font-size: 14px;
+}
+.nav a:hover{ color: var(--ivory); }
+
+.nav-cta{
+  padding: 9px 12px;
+  border-radius: var(--r12);
+  background: var(--gold);
+  color: #000 !important;
+  border: 1px solid var(--border-gold-35);
+}
+
+/* navbar links tipo boton (si los usas) */
+.navlink{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text-90);
+  padding: 10px 12px;
+  border-radius: var(--r12);
+  border: 1px solid var(--border-gold-18);
+  background: var(--surface-25);
+}
+.navlink:hover{
+  color: var(--ivory);
+  border-color: var(--border-gold-35);
+  background: var(--surface-42);
+}
+
+/* carrito icon (compat: cart-icon y cartbtn) */
+.cart-icon,
+.cartbtn{
+  width: 42px;
+  height: 42px;
+  display:grid;
+  place-items:center;
+  border-radius: var(--r12);
+  border: 1px solid var(--border-gold-25);
+  background: var(--surface-10);
+  color: var(--gold);
+  position: relative;
+  text-decoration:none;
+}
+.cart-icon:hover,
+.cartbtn:hover{
+  filter: brightness(1.06);
+  border-color: var(--border-gold-38);
+}
+
+/* icon svg (compat) */
+.cart-svg,
+.cartbtn__icon{
+  width: 20px;
+  height: 20px;
+  display:block;
+}
+
+/* badge (compat) */
+.cart-badge,
+.cartbtn__badge{
+  position:absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #000;
+  font-weight: 900;
+  font-size: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 2px solid var(--badge-border);
+}
+
+/* =========================
+   Cards / Components
+   ========================= */
+.card{
+  border-radius: var(--r16);
+  border: 1px solid var(--border-gold-18);
+  background: var(--panel-grad-soft);
+  overflow:hidden;
+  transition: transform .15s ease, border-color .15s ease, filter .15s ease;
+}
+.card:hover{
+  transform: translateY(-2px);
+  border-color: var(--border-gold-38);
+  filter: brightness(1.01);
+}
+
+.card-body{ padding: 16px; }
+
+.badge{
+  display:inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-gold-25);
+  background: rgba(212,175,55,.14);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+/* compat nombres */
+.name,
+.card-title{
+  margin: 10px 0 6px;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.desc,
+.card-desc{
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--text-72);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 34px;
+}
+
+.meta,
+.card-meta{
+  display:flex;
+  flex-direction:column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-72);
+}
+
+.price-row,
+.card-bottom{
+  margin-top: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+
+.price{
+  font-size: 16px;
+  color: var(--ivory);
+}
+
+/* ---------- Buttons ---------- */
+.btn,
+.btn-outline,
+.btn-danger{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: var(--r12);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn{
+  background: var(--gold);
+  color: #000;
+  border-color: var(--border-gold-35);
+}
+.btn:hover{ filter: brightness(1.05); }
+
+.btn-outline{
+  background: transparent;
+  color: var(--ivory);
+  border-color: var(--border-gold-25);
+}
+.btn-outline:hover{
+  border-color: var(--border-gold-35);
+  background: var(--surface-30);
+}
+
+.btn-danger{
+  background: var(--danger-bg);
+  color: var(--danger-text);
+  border-color: var(--danger-border);
+}
+
+/* =========================
+   Footer
+   ========================= */
+.footer{
+  border-top: 1px solid var(--border-gold-12);
+  padding: 18px 0;
+  color: var(--text-60);
+}
+
+/* =========================
+   Flash messages
+   ========================= */
+.flash-wrap{ margin-top: 12px; }
+
+.flash{
+  padding: 12px 14px;
+  border-radius: var(--r14);
+  border: 1px solid var(--border-gold-20);
+  background: var(--surface-55);
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.flash-success{ border-color: rgba(80, 200, 120, .35); }
+.flash-error{ border-color: rgba(255, 65, 65, .35); }
+
+/* =========================
+   HOME CATEGORIES
+   ========================= */
+.home-cats{
+  display:grid;
+  grid-template-columns: repeat(1, minmax(0,1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+@media (min-width: 640px){
+  .home-cats{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (min-width: 960px){
+  .home-cats{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+
+.cat-card{
+  display:block;
+  text-decoration:none;
+  color: var(--ivory);
+  border-radius: var(--r18);
+  border: 1px solid var(--border-gold-18);
+  background: var(--panel-grad);
+  padding: 16px;
+  transition: transform .15s ease, border-color .15s ease, filter .15s ease;
+}
+.cat-card:hover{
+  transform: translateY(-2px);
+  border-color: var(--border-gold-45);
+  filter: brightness(1.03);
+}
+
+.cat-card__top{ display:flex; justify-content:flex-start; margin-bottom: 12px; }
+
+.cat-pill{
+  display:inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-gold-25);
+  background: rgba(212,175,55,.14);
+  color: var(--gold);
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.cat-card__title{
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.cat-card__desc{
+  font-size: 13px;
+  color: var(--text-72);
+  min-height: 34px;
+}
+
+.cat-card__cta{
+  margin-top: 14px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.home-actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+/* =========================
+   PRODUCT DETAIL
+   ========================= */
+.product-wrap{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 960px){
+  .product-wrap{
+    grid-template-columns: 1.05fr .95fr;
+    align-items: start;
+  }
+}
+
+.product-media{
+  border-radius: var(--r16);
+  border: 1px solid var(--border-gold-18);
+  background: var(--panel-grad);
+  overflow:hidden;
+}
+
+.product-img{
+  width:100%;
+  height: 360px;
+  object-fit: cover;
+  display:block;
+}
+@media (min-width: 960px){
+  .product-img{ height: 520px; }
+}
+
+.product-img--empty{
+  height: 360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+@media (min-width: 960px){
+  .product-img--empty{ height: 520px; }
+}
+
+.product-panel{
+  border-radius: var(--r16);
+  border: 1px solid var(--border-gold-18);
+  background: var(--panel-grad);
+  padding: 16px;
+}
+
+.product-meta{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text-78);
+  margin-bottom: 12px;
+}
+.product-meta span{ opacity:.75; }
+
+.product-buy{
+  border-top: 1px solid var(--line-soft);
+  padding-top: 12px;
+}
+
+.product-price{
+  font-size: 26px;
+  font-weight: 1000;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+/* Add to cart block */
+.add-to-cart{ margin-top: 10px; }
+.add-to-cart .btn{ width: 100%; }
+
+/* =========================
+   CARD IMAGES (catalog)
+   ========================= */
+.card-media{
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--surface-45);
+}
+.card-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+}
+.card-media--empty{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* =========================
+   CART
+   ========================= */
+.cart-wrap{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 960px){
+  .cart-wrap{ grid-template-columns: 1fr 340px; }
+}
+
+.cart-item{
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  padding: 14px;
+  border-radius: var(--r16);
+  border: 1px solid var(--border-gold-18);
+  background: var(--panel-grad);
+  margin-bottom: 12px;
+}
+
+.thumb{
+  width: 64px;
+  height: 64px;
+  border-radius: var(--r14);
+  border: 1px solid var(--border-gold-18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: var(--text-55);
+  font-weight: 800;
+}
+
+.info .name{ font-weight: 900; margin: 0 0 6px; }
+.info .price{ color: var(--gold); font-weight: 900; }
+
+.actions{
+  grid-column: 1 / -1;
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qty-form{
+  display:flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.qty{
+  width: 84px;
+  padding: 10px;
+  border-radius: var(--r12);
+  border: 1px solid var(--border-gold-20);
+  background: rgba(0,0,0,.04);
+  color: var(--ivory);
+}
+
+/* summary */
+.summary-box{
+  padding: 16px;
+  border-radius: var(--r16);
+  border: 1px solid var(--border-gold-18);
+  background: var(--panel-grad);
+}
+
+.summary-box h3{ margin: 0 0 12px; }
+
+.summary-box .row{
+  display:flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.summary-actions{
+  margin-top: 12px;
+  display:flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+/* ================================
+   CART – IMAGE FIX
+   ================================ */
+
+.cart__img{
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #F6F6F6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart__img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================================
+   CART PAGE – LAYOUT PRO (FIX)
+   ================================ */
+
+/* Helpers que usas en templates */
+.muted{ opacity:.72; }
+
+/* Alias de botones que estas usando en HTML */
+.btn--ghost{
+  background: transparent !important;
+  border: 1px solid rgba(212,175,55,.35) !important;
+  color: inherit !important;
+}
+.btn--ghost:hover{
+  background: rgba(255,255,255,.06) !important;
+}
+.btn--danger{
+  background: #E24B4B !important;
+  border: 1px solid rgba(226,75,75,.55) !important;
+  color: #fff !important;
+}
+.btn--danger:hover{ filter: brightness(1.05); }
+
+/* Hero simple y limpio */
+.hero{
+  width: min(1100px, 92%);
+  margin: 18px auto 10px;
+}
+.hero h1{
+  margin: 0 0 6px;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+}
+
+/* Contenedor general del carrito */
+.cart{
+  width: min(1100px, 92%);
+  margin: 16px auto 40px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Lista items */
+.cart__items{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Tarjeta de item */
+.cart__item{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(212,175,55,.20);
+  border-radius: 16px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 110px 1fr auto auto auto;
+  gap: 14px;
+  align-items: center;
+}
+
+/* Imagen fija y bonita */
+.cart__img{
+  width: 110px;
+  height: 110px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(0,0,0,.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cart__img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Info */
+.cart__name{
+  font-weight: 900;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.cart__info .muted{
+  font-weight: 700;
+}
+
+/* Cantidad */
+.cart__qty{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(212,175,55,.22);
+  background: rgba(255,255,255,.04);
+}
+.cart__qty form{ margin: 0; }
+.cart__qty .btn{
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 900;
+  line-height: 1;
+}
+.cart__qtynum{
+  min-width: 24px;
+  text-align: center;
+  font-weight: 900;
+}
+
+/* Subtotal y remove */
+.cart__subtotal{
+  font-weight: 900;
+  white-space: nowrap;
+}
+.cart__remove form{ margin: 0; }
+
+/* Summary */
+.summary{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(212,175,55,.22);
+  border-radius: 16px;
+  padding: 16px;
+  position: sticky;
+  top: 14px;
+}
+.summary h2{
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+}
+.summary__row{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid rgba(212,175,55,.15);
+}
+.summary__row:first-of-type{ border-top: none; }
+
+.summary__actions{
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.summary__actions .btn,
+.summary__actions .btn--ghost{
+  width: 100%;
+  justify-content: center;
+}
+
+/* Responsive: en celular todo en una columna */
+@media (max-width: 900px){
+  .cart{
+    grid-template-columns: 1fr;
+  }
+  .cart__item{
+    grid-template-columns: 92px 1fr;
+    grid-template-areas:
+      "img info"
+      "img qty"
+      "img subtotal"
+      "img remove";
+    align-items: start;
+  }
+  .cart__img{ grid-area: img; width: 92px; height: 92px; }
+  .cart__info{ grid-area: info; }
+  .cart__qty{ grid-area: qty; width: fit-content; }
+  .cart__subtotal{ grid-area: subtotal; padding-top: 6px; }
+  .cart__remove{ grid-area: remove; padding-top: 8px; }
+  .summary{ position: static; }
+}
+
+/* ================================
+   AUTH (LOGIN / REGISTER) – LIGHT INPUTS
+   ================================ */
+
+.auth-card{
+  max-width: 560px;
+  margin-top: 14px;
+}
+
+.auth-grid{
+  display: grid;
+  gap: 12px;
+}
+
+.auth-field label{
+  font-weight: 800;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.auth-input{
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(212,175,55,.20);
+  background: #FFFFFF;
+  color: #0B0B0B;
+  caret-color: #0B0B0B;
+}
+
+.auth-input::placeholder{
+  color: rgba(0,0,0,.45);
+}
+
+.auth-input:focus{
+  outline: none;
+  border-color: rgba(212,175,55,.65);
+  box-shadow: 0 0 0 3px rgba(212,175,55,.15);
+}
+
+.auth-row{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.auth-row .auth-input{
+  flex: 1;
+}
+
+.auth-row .btn-outline{
+  height: 44px;
+  white-space: nowrap;
+}
+
+/* ================================
+   CHECKOUT (LAMIN GOLD)
+   ================================ */
+
+.checkout-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:16px;
+}
+
+.checkout-card{
+  width:min(900px, 100%);
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, rgba(0,0,0,.08));
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+.checkout-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field label{
+  display:block;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.field .hint{
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted, #666);
+}
+
+.field-full{
+  grid-column: 1 / -1;
+}
+
+.input{
+  width:100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(212,175,55,.30);
+  background: #fff;
+  color: var(--text, #0b0b0b);
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+.input:focus{
+  border-color: rgba(212,175,55,.75);
+  box-shadow: 0 0 0 4px rgba(212,175,55,.18);
+}
+
+.checkout-summary{
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(212,175,55,.25);
+  background: rgba(212,175,55,.07);
+}
+
+.summary-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size: 16px;
+}
+
+.checkout-btn{
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-weight: 900;
+}
+
+.checkout-footnote{
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted, #666);
+  text-align:center;
+}
+
+/* Responsive */
+@media (max-width: 720px){
+  .checkout-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   THEME TOGGLE (LIGHT / DARK) – ADDON
+   Pegalo al FINAL del CSS
+   ================================ */
+
+/* Variables faltantes (para que no haya paginas "sin estilo") */
+:root{
+  --surface: #FAFAFA;
+  --surface-2: #F5F5F0;
+  --border: rgba(0,0,0,.08);
+  --text: #0B0B0B;
+  --text-muted: rgba(11,11,11,.65);
+}
+
+/* Dark mode: SOLO cambia variables (no rompe estilos existentes) */
+body.dark{
+  --bg:#0B0B0B;
+  --surface:#141414;
+  --surface-2:#101010;
+  --border: rgba(255,255,255,.12);
+
+  --ivory:#F5F5F5;         /* tu CSS usa --ivory como color principal */
+  --text:#F5F5F5;
+  --text-muted: rgba(245,245,245,.70);
+
+  --muted:#141414;
+
+  /* Ajustes de lineas y sombras para dark */
+  --line-soft: rgba(255,255,255,.10);
+  --shadow-soft: 0 10px 30px rgba(0,0,0,.35);
+
+  /* Gradientes de tarjetas/paneles (antes eran blancos) */
+  --panel-grad: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  --panel-grad-soft: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+
+  /* Textos auxiliares (tu CSS tiene --text-55 / --text-60) */
+  --text-55: rgba(245,245,245,.55);
+  --text-60: rgba(245,245,245,.60);
+}
+
+/* Inputs (login/checkout) – en dark NO pueden quedar blancos */
+body.dark .auth-input,
+body.dark .input{
+  background: rgba(255,255,255,.06) !important;
+  color: var(--text) !important;
+  border-color: rgba(212,175,55,.28) !important;
+}
+
+body.dark .auth-input::placeholder,
+body.dark .input::placeholder{
+  color: rgba(245,245,245,.55) !important;
+}
+
+/* Checkout card / paneles que usan var(--surface, #fff) */
+body.dark .checkout-card{
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+/* Boton del toggle en navbar (si no existe en tu CSS) */
+.theme-toggle{
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--border);
+  color: var(--ivory);
+  padding: 10px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+.theme-toggle:hover{
+  transform: translateY(-1px);
+  border-color: rgba(212,175,55,.35);
+}
+
+/* En modo claro, el toggle se ve limpio tambien */
+body:not(.dark) .theme-toggle{
+  background: rgba(0,0,0,.04);
+  color: #0B0B0B;
+}
+
+/* ================================
+   DARK MODE – FIX TEXTOS QUE QUEDAN NEGROS
+   (Home hero + Cards producto + Detalle producto)
+   Pegalo al FINAL
+================================ */
+
+/* HOME (debajo de "Lamin Gold") */
+body.dark .hero p,
+body.dark .hero .page-subtitle,
+body.dark .hero .subtitle,
+body.dark .hero .lead,
+body.dark .hero .muted,
+body.dark .hero .text-muted{
+  color: var(--text-muted) !important;
+}
+
+/* CARDS de productos (texto debajo del nombre) */
+body.dark .product-card p,
+body.dark .product-card .meta,
+body.dark .product-card .specs,
+body.dark .product-card .desc,
+body.dark .product-card .muted,
+body.dark .product-card .text-muted,
+body.dark .card.product p,
+body.dark .card.product .meta,
+body.dark .card.product .specs,
+body.dark .card.product .desc{
+  color: var(--text-muted) !important;
+}
+
+/* DETALLE de producto (lineas info/descripcion) */
+body.dark .product-detail p,
+body.dark .product-detail .meta,
+body.dark .product-detail .specs,
+body.dark .product-detail .desc,
+body.dark .product-detail .muted,
+body.dark .product-detail .text-muted,
+body.dark .detail p,
+body.dark .detail .meta,
+body.dark .detail .specs,
+body.dark .detail .desc{
+  color: var(--text-muted) !important;
+}
+
+/* Titulos en esas zonas (por si alguno quedo oscuro) */
+body.dark .hero h1,
+body.dark .product-card h1,
+body.dark .product-card h2,
+body.dark .product-card h3,
+body.dark .product-detail h1,
+body.dark .product-detail h2,
+body.dark .product-detail h3,
+body.dark .detail h1,
+body.dark .detail h2,
+body.dark .detail h3{
+  color: var(--text) !important;
+}
+
+/* ================================
+   DARK MODE – FIX CARD DESC & META
+================================ */
+
+/* Descripcion del producto */
+body.dark .card-desc{
+  color: var(--text-muted) !important;
+}
+
+/* Meta info: Color / Baño */
+body.dark .card-meta span{
+  color: var(--text-muted) !important;
+}
+
+/* ================================
+   DARK MODE – FIX SUBTITLE + PRODUCT META
+================================ */
+
+/* Subtitulo en home / paginas */
+body.dark .page-subtitle{
+  color: var(--text-muted) !important;
+}
+
+/* Meta del producto (detalle) */
+body.dark .product-meta span{
+  color: var(--text-muted) !important;
+}
+
+body.dark .product-meta b{
+  color: var(--text) !important;
+}
+
+/* ================================
+   CHECKOUT – HINT (ultra especifico)
+================================ */
+
+.checkout-card .hint{
+  color: rgba(11,11,11,.65) !important;
+}
+
+body.dark .checkout-card .hint{
+  color: var(--text-muted) !important;
+}
+
+/* ================================
+   CHECKOUT – FIX HINT + FOOTNOTE (LIGHT/DARK)
+================================ */
+
+/* Modo claro: texto oscuro legible */
+.hint,
+.checkout-footnote{
+  color: rgba(11,11,11,.65);
+}
+
+/* Modo oscuro: texto claro legible */
+body.dark .hint,
+body.dark .checkout-footnote{
+  color: var(--text-muted) !important;
+}
+
+.card-chip, .chip, .badge, .card-badge { display:none !important; }

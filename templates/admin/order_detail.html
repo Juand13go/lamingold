@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Admin - Pedido{% endblock %}
+
+{% block content %}
+<section class="container main">
+
+  <div style="display:flex; gap:12px; align-items:flex-end; justify-content:space-between; flex-wrap:wrap;">
+    <div>
+      <h1 class="page-title" style="margin-bottom:6px;">Pedido {{ order["$id"] }}</h1>
+      <p class="page-subtitle">Detalle del pedido y productos.</p>
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn-outline" href="/admin/orders">Volver</a>
+      <a class="btn-outline" href="/admin">Panel</a>
+    </div>
+  </div>
+
+  <div class="cart__items" style="margin-top:14px;">
+
+    <div class="cart__item" style="grid-template-columns: 1fr 320px; align-items:start;">
+      <div>
+        <div style="font-weight:900; font-size:18px; margin-bottom:8px;">Datos del cliente</div>
+        <div class="muted" style="display:grid; gap:4px;">
+          <div><strong>Nombre:</strong> {{ order.full_name }}</div>
+          <div><strong>Email:</strong> {{ order.email }}</div>
+          <div><strong>WhatsApp:</strong> {{ order.phone }}</div>
+          <div><strong>Ciudad:</strong> {{ order.city }}</div>
+          <div><strong>Direccion:</strong> {{ order.address }}</div>
+          {% if order.notes %}
+            <div><strong>Notas:</strong> {{ order.notes }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div>
+        <div style="font-weight:900; font-size:18px; margin-bottom:8px;">Estado</div>
+
+        <div class="muted" style="margin-bottom:10px;">
+          Actual: <strong>{{ order.status or "nuevo" }}</strong>
+        </div>
+
+        <form method="POST" action="/admin/orders/{{ order['$id'] }}/status" class="summary-box" style="padding:12px;">
+          <label style="font-weight:800; display:block; margin-bottom:6px;">Cambiar estado</label>
+          <select name="status" class="auth-input" style="margin-bottom:10px;">
+            {% set st = (order.status or 'nuevo') %}
+            {% for s in ["nuevo","contactado","en_proceso","enviado","entregado","cancelado"] %}
+              <option value="{{ s }}" {% if s == st %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+          </select>
+          <button class="btn" type="submit" style="width:100%;">Guardar</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="cart__item" style="grid-template-columns: 1fr auto; align-items:center;">
+      <div>
+        <div style="font-weight:900; font-size:18px;">Items</div>
+        <div class="muted">Total items: {{ items|length }}</div>
+      </div>
+      <div style="font-weight:900; font-size:18px;">Total: $ {{ total }}</div>
+    </div>
+
+    {% if not items or items|length == 0 %}
+      <div class="summary-box">
+        <strong>Este pedido no tiene items.</strong>
+      </div>
+    {% else %}
+      {% for it in items %}
+        <div class="cart__item" style="grid-template-columns: 96px 1fr auto; gap:14px; align-items:center;">
+
+          <!-- IMAGEN -->
+          <div style="width:96px; height:96px; border-radius:12px; overflow:hidden; border:1px solid rgba(0,0,0,.08); background:#fff;">
+            <img
+              src="{{ it.image_url or 'https://via.placeholder.com/300x300?text=LG' }}"
+              alt="{{ it.product_name_snapshot }}"
+              style="width:100%; height:100%; object-fit:cover; display:block;"
+            >
+          </div>
+
+          <!-- INFO -->
+          <div>
+            <div style="font-weight:900;">{{ it.product_name_snapshot }}</div>
+            <div class="muted">
+              Cantidad: <strong>{{ it.quantity }}</strong>
+              {% if it.variant_label_snapshot %}
+                · Variante: <strong>{{ it.variant_label_snapshot }}</strong>
+              {% endif %}
+            </div>
+
+            {% if it.product_id %}
+              <div class="muted" style="margin-top:4px; font-size:12px;">
+                <strong>ID Producto:</strong> {{ it.product_id }}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- PRECIOS -->
+          <div style="text-align:right;">
+            <div class="muted">Unit: $ {{ (it.unit_price or 0) | int }}</div>
+            <div style="font-weight:900; font-size:18px;">$ {{ (it.subtotal or 0) | int }}</div>
+          </div>
+
+        </div>
+      {% endfor %}
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

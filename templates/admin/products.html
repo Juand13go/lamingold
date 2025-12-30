@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Admin - Productos{% endblock %}
+
+{% block content %}
+<section class="container main">
+  <div style="display:flex; gap:12px; align-items:flex-end; justify-content:space-between; flex-wrap:wrap;">
+    <div>
+      <h1 class="page-title" style="margin-bottom:6px;">Productos</h1>
+      <p class="page-subtitle">Listado del catalogo (Appwrite).</p>
+    </div>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn-outline" href="/admin">Volver</a>
+      <a class="btn" href="/admin/products/new">+ Nuevo producto</a>
+    </div>
+  </div>
+
+  {% if not products or products|length == 0 %}
+    <div class="summary-box" style="margin-top:14px;">
+      <strong>No hay productos cargados.</strong>
+      <p class="muted" style="margin-top:6px;">Crea el primero desde el boton "Nuevo producto".</p>
+    </div>
+  {% else %}
+
+    <div class="cart__items" style="margin-top:14px;">
+      {% for p in products %}
+        <div class="cart__item" style="grid-template-columns: 110px 1fr auto; align-items:center;">
+          <div class="cart__img">
+            <img src="{{ p.image_url or 'https://via.placeholder.com/300x300?text=LG' }}" alt="{{ p.name }}">
+          </div>
+
+          <div class="cart__info">
+            <div class="cart__name">{{ p.name }}</div>
+            <div class="muted" style="display:flex; gap:10px; flex-wrap:wrap;">
+              <span><strong>ID:</strong> {{ p["$id"] }}</span>
+              {% if p.category %}<span><strong>Categoria:</strong> {{ p.category }}</span>{% endif %}
+              {% if p.gold_type %}<span><strong>Oro:</strong> {{ p.gold_type }}</span>{% endif %}
+              {% if p.color %}<span><strong>Color:</strong> {{ p.color }}</span>{% endif %}
+            </div>
+            {% if p.description %}
+              <div class="muted" style="margin-top:6px;">{{ p.description }}</div>
+            {% endif %}
+          </div>
+
+          <div style="text-align:right; min-width:140px;">
+            <div style="font-weight:900; font-size:18px;">
+              $ {{ (p.base_price or 0) | int }}
+            </div>
+            <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px; flex-wrap:wrap;">
+              <a class="btn-outline" href="/producto/{{ p['$id'] }}">Ver</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  {% endif %}
+</section>
+{% endblock %}

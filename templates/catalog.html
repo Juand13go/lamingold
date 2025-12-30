@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Catalogo - Lamin Gold{% endblock %}
+
+{% block content %}
+<section class="container">
+  <h1 class="page-title">Catalogo</h1>
+  <p class="page-subtitle">Accesorios de lujo en oro laminado 18k</p>
+
+  {% if products and products|length > 0 %}
+    <div class="grid">
+      {% for p in products %}
+        <article class="card">
+
+          <!-- IMAGEN DEL PRODUCTO -->
+          {% if p.get("image_url") %}
+            <div class="card-media">
+              <img class="card-img" src="{{ p.get('image_url') }}" alt="{{ p.get('name','Producto') }}">
+            </div>
+          {% else %}
+            <div class="card-media card-media--empty">
+              <div style="opacity:.7; font-weight:900;">SIN FOTO</div>
+            </div>
+          {% endif %}
+
+          <div class="card-body">
+            <div class="badge">{{ p.get("category","") }}</div>
+
+            <h3 class="card-title">{{ p.get("name","Producto") }}</h3>
+
+            {% if p.get("description") %}
+              <p class="card-desc">{{ p.get("description","") }}</p>
+            {% else %}
+              <p class="card-desc" style="opacity:.7;">Sin descripcion por ahora.</p>
+            {% endif %}
+
+            <div class="card-meta">
+              <span>Color: {{ p.get("color","Dorado") }}</span>
+              <span>Baño: {{ p.get("gold_type","18k") }}</span>
+            </div>
+
+            <div class="card-bottom">
+              <strong class="price">$ {{ "%.0f"|format(p.get("base_price",0)) }}</strong>
+              <a class="btn-outline" href="/producto/{{ p.get('$id') }}">Ver</a>
+            </div>
+
+            <form method="POST" action="/carrito/agregar" class="add-to-cart">
+              <input type="hidden" name="product_id" value="{{ p.get('$id') }}">
+              <input type="hidden" name="name" value="{{ p.get('name','Producto') }}">
+              <input type="hidden" name="unit_price" value="{{ p.get('base_price',0) }}">
+              <input type="hidden" name="image_url" value="{{ p.get('image_url', '') }}">
+              <input type="hidden" name="qty" value="1">
+              <button class="btn" type="submit">Agregar al carrito</button>
+            </form>
+          </div>
+
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No hay productos disponibles.</p>
+  {% endif %}
+</section>
+{% endblock %}

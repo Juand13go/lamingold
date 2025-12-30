@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Registro - Lamin Gold{% endblock %}
+
+{% block content %}
+<section class="container main">
+  <h1 class="page-title">Crear cuenta</h1>
+  <p class="page-subtitle">Completa tus datos para comprar mas rapido.</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-wrap">
+        {% for category, message in messages %}
+          <div class="flash {% if category == 'success' %}flash-success{% else %}flash-error{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="summary-box auth-card">
+    <form method="POST" action="/register">
+      <div class="auth-grid">
+
+        <div class="auth-field">
+          <label>Nombre completo</label>
+          <input class="auth-input" name="full_name" type="text" required>
+        </div>
+
+        <div class="auth-field">
+          <label>Email</label>
+          <input class="auth-input" name="email" type="email" required>
+        </div>
+
+        <div class="auth-field">
+          <label>WhatsApp / Celular</label>
+          <input class="auth-input" name="phone" type="text" required>
+        </div>
+
+        <div class="auth-field">
+          <label>Ciudad</label>
+          <input class="auth-input" name="city" type="text" required>
+        </div>
+
+        <div class="auth-field">
+          <label>Direccion</label>
+          <input class="auth-input" name="address" type="text" required>
+        </div>
+
+        <div class="auth-field">
+          <label>Contrasena</label>
+          <div class="auth-row">
+            <input class="auth-input" id="regPass1" name="password" type="password" required minlength="6">
+            <button type="button" class="btn-outline" id="toggleRegPass1">
+              Mostrar
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label>Confirmar contrasena</label>
+          <div class="auth-row">
+            <input class="auth-input" id="regPass2" name="password2" type="password" required minlength="6">
+            <button type="button" class="btn-outline" id="toggleRegPass2">
+              Mostrar
+            </button>
+          </div>
+        </div>
+
+        <button class="btn" type="submit" style="margin-top:6px;">Crear cuenta</button>
+        <a class="btn-outline" href="/login" style="text-align:center;">Ya tengo cuenta</a>
+
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function togglePass(btnId, inputId){
+    const btn = document.getElementById(btnId);
+    const input = document.getElementById(inputId);
+
+    btn.addEventListener("click", () => {
+      const isHidden = input.type === "password";
+      input.type = isHidden ? "text" : "password";
+      btn.textContent = isHidden ? "Ocultar" : "Mostrar";
+    });
+  }
+
+  togglePass("toggleRegPass1", "regPass1");
+  togglePass("toggleRegPass2", "regPass2");
+</script>
+{% endblock %}

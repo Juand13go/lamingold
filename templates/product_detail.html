@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}{{ product.get("name","Producto") }} - Lamin Gold{% endblock %}
+
+{% block content %}
+<section class="container main">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;">
+    <a class="btn-outline" href="/catalogo">Volver al catalogo</a>
+    <div class="badge">{{ product.get("category","") }}</div>
+  </div>
+
+  <div class="product-wrap">
+    <!-- Imagen / placeholder -->
+    <div class="product-media">
+      {% if product.get("image_url") %}
+        <img class="product-img" src="{{ product.get('image_url') }}" alt="{{ product.get('name','Producto') }}">
+      {% else %}
+        <div class="product-img product-img--empty">
+          <div style="opacity:.7; font-weight:900;">SIN FOTO</div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Info -->
+    <div class="product-panel">
+      <h1 class="page-title" style="margin:0 0 8px;">{{ product.get("name","Producto") }}</h1>
+      <p class="page-subtitle" style="margin-bottom:14px;">
+        {{ product.get("description","Sin descripcion por ahora.") }}
+      </p>
+
+      <div class="product-meta">
+        <div><span>Color:</span> <b>{{ product.get("color","Dorado") }}</b></div>
+        <div><span>Baño:</span> <b>{{ product.get("gold_type","18k") }}</b></div>
+      </div>
+
+      <div class="product-buy">
+        <div class="product-price">
+          $ {{ "%.0f"|format(product.get("base_price",0)) }}
+        </div>
+
+        <form class="product-form" method="POST" action="/carrito/agregar">
+          <input type="hidden" name="product_id" value="{{ product.get('$id') }}">
+          <input type="hidden" name="name" value="{{ product.get('name','') }}">
+          <input type="hidden" name="unit_price" value="{{ product.get('base_price',0) }}">
+          <input type="hidden" name="image_url" value="{{ product.get('image_url','') }}">
+
+          <div class="qty-form" style="justify-content:flex-start;">
+            <label style="font-weight:800;">Cantidad</label>
+            <input class="qty" name="qty" type="number" min="1" value="1" required>
+          </div>
+
+          <button class="btn" type="submit" style="width:100%; margin-top:10px;">
+            Agregar al carrito
+          </button>
+        </form>
+        <br>
+        <a class="btn-outline" href="/carrito" style="text-align:center; margin-top:10px;">
+          Ir al carrito
+        </a>
+      </div>
+
+      <div class="summary-box" style="margin-top:14px;">
+        <h3 style="margin:0 0 10px;">Garantia y cuidado</h3>
+        <div style="opacity:.85; font-size:14px; line-height:1.5;">
+          Evita agua salada, perfumes directos y golpes fuertes. Limpia con paño suave.
+          Si tienes dudas, escribenos por WhatsApp y te asesoramos.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

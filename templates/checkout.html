@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Checkout - Lamin Gold{% endblock %}
+
+{% block content %}
+<section class="container main">
+  <div class="checkout-head">
+    <div>
+      <h1 class="page-title">Checkout</h1>
+      <p class="page-subtitle">Completa tus datos para generar el pedido.</p>
+    </div>
+  </div>
+
+  <div class="checkout-wrap">
+    <form class="checkout-card" method="POST" action="/checkout">
+      <div class="checkout-grid">
+
+        <div class="field">
+          <label>Nombre completo</label>
+          <input class="input" name="full_name" required autocomplete="name">
+        </div>
+
+        <div class="field">
+          <label>WhatsApp / Celular</label>
+          <input class="input" name="phone" required autocomplete="tel">
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input class="input" type="email" name="email" required autocomplete="email">
+        </div>
+
+        <div class="field">
+          <label>Ciudad</label>
+          <input class="input" name="city" required autocomplete="address-level2">
+        </div>
+
+        <div class="field field-full">
+          <label>Direccion</label>
+          <input class="input" name="address" required autocomplete="street-address">
+        </div>
+
+        <div class="field field-full">
+          <label>Notas (opcional)</label>
+          <textarea class="input" name="notes" rows="3"></textarea>
+          <div class="hint">Si quieres, deja color, talla o detalles del pedido.</div>
+        </div>
+
+      </div>
+
+      <div class="checkout-summary">
+        <div class="summary-line">
+          <span>Total</span>
+          <strong>$ {{ "%.0f"|format(totals.subtotal) }}</strong>
+        </div>
+      </div>
+
+      <button class="btn checkout-btn" type="submit">
+        Confirmar pedido
+      </button>
+
+      <div class="checkout-footnote">
+        Al confirmar, se genera el pedido y luego lo confirmas por WhatsApp.
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Carrito | Lamin Gold{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>Carrito</h1>
+  <p class="muted">Revisa tus productos antes de confirmar.</p>
+</section>
+
+{% if cart and cart|length > 0 %}
+  <div class="cart">
+    <div class="cart__items">
+      {% for _, item in cart.items() %}
+        <div class="cart__item">
+          <div class="cart__img">
+            <img src="{{ item.image_url or 'https://via.placeholder.com/120x120?text=LG' }}" alt="{{ item.name }}">
+          </div>
+
+          <div class="cart__info">
+            <div class="cart__name">{{ item.name }}</div>
+            <div class="muted">$ {{ "{:,.0f}".format(item.unit_price).replace(",", ".") }}</div>
+          </div>
+
+          <div class="cart__qty">
+            <form method="POST" action="/carrito/update">
+              <input type="hidden" name="product_id" value="{{ item.product_id }}">
+              <input type="hidden" name="action" value="minus">
+              <button class="btn btn--ghost" type="submit">-</button>
+            </form>
+
+            <div class="cart__qtynum">{{ item.quantity }}</div>
+
+            <form method="POST" action="/carrito/update">
+              <input type="hidden" name="product_id" value="{{ item.product_id }}">
+              <input type="hidden" name="action" value="plus">
+              <button class="btn btn--ghost" type="submit">+</button>
+            </form>
+          </div>
+
+          <div class="cart__subtotal">
+            $ {{ "{:,.0f}".format(item.unit_price * item.quantity).replace(",", ".") }}
+          </div>
+
+          <div class="cart__remove">
+            <form method="POST" action="/carrito/remove">
+              <input type="hidden" name="product_id" value="{{ item.product_id }}">
+              <button class="btn btn--danger" type="submit">Eliminar</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="cart__summary">
+      <div class="summary">
+        <div class="summary__row">
+          <span class="muted">Items</span>
+          <strong>{{ totals.items_count }}</strong>
+        </div>
+        <div class="summary__row">
+          <span class="muted">Total</span>
+          <strong>$ {{ "{:,.0f}".format(totals.subtotal).replace(",", ".") }}</strong>
+        </div>
+
+        <div class="summary__actions">
+          <form method="POST" action="/carrito/clear">
+            <button class="btn btn--ghost" type="submit">Vaciar carrito</button>
+          </form>
+
+          <a class="btn" href="/checkout">Ir a checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="empty">
+    <p class="muted">Tu carrito esta vacio.</p>
+    <a class="btn" href="/catalogo">Ir al catalogo</a>
+  </div>
+{% endif %}
+{% endblock %}
