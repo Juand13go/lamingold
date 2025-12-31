@@ -1255,5 +1255,71 @@ body.dark .alert{
   border-color: rgba(212,175,55,.35);
 }
 
+/* ================================
+   HOME – CATEGORIAS: NEGRO EN LIGHT / BLANCO EN DARK
+================================ */
+
+/* ----- LIGHT (por defecto): todo negro, sin morado/azul ----- */
+a.card, a.card *{
+  color: #0B0B0B !important;
+}
+a.card:visited,
+a.card:hover,
+a.card:active,
+a.card:focus{
+  color: #0B0B0B !important;
+}
+a.card .muted{
+  color: rgba(11,11,11,.65) !important;
+}
+a.card:hover{
+  background: rgba(212,175,55,.04);
+  border-color: rgba(212,175,55,.35);
+}
+
+/* ----- DARK: texto legible sobre fondo oscuro ----- */
+body.dark a.card, 
+body.dark a.card *{
+  color: var(--text) !important;
+}
+body.dark a.card .muted{
+  color: var(--text-muted) !important;
+}
+body.dark a.card:hover{
+  background: rgba(255,255,255,.04);
+  border-color: rgba(212,175,55,.35);
+}
+
+/* ================================
+   PRODUCT CARDS – FIX TEXTO EN DARK MODE
+================================ */
+
+/* Titulos de producto */
+body.dark .card .card-title,
+body.dark .card h3{
+  color: var(--text) !important;
+}
+
+/* Descripcion */
+body.dark .card .card-desc{
+  color: var(--text-muted) !important;
+}
+
+/* Meta (Color / Baño) */
+body.dark .card .card-meta span{
+  color: var(--text-muted) !important;
+}
+
+/* Precio */
+body.dark .card .price,
+body.dark .card strong{
+  color: var(--gold) !important;
+}
+
+/* Boton "Ver" dentro de la card */
+body.dark .card .btn-outline{
+  color: var(--text) !important;
+  border-color: rgba(212,175,55,.35) !important;
+}
 
 .card-chip, .chip, .badge, .card-badge { display:none !important; }
