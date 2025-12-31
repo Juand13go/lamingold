@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, session, flash, request
-from services.product_service import list_products, create_product,get_product
+from services.product_service import list_products, create_product, get_product, delete_product_cascade
 from services.order_service import list_orders, get_order_items, update_order_status
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
@@ -171,3 +171,17 @@ def admin_order_status(order_id):
         flash(f"No se pudo actualizar: {str(e)}", "error")
 
     return redirect(f"/admin/orders/{order_id}")
+
+@admin_bp.post("/products/<product_id>/delete")
+def admin_product_delete(product_id):
+    guard = require_admin()
+    if guard:
+        return guard
+
+    try:
+        delete_product_cascade(product_id)
+        flash("Producto eliminado.", "success")
+    except Exception as e:
+        flash(f"No se pudo eliminar el producto: {str(e)}", "error")
+
+    return redirect("/admin/products")

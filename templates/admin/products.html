@@ -42,12 +42,22 @@
             {% endif %}
           </div>
 
-          <div style="text-align:right; min-width:140px;">
+          <div style="text-align:right; min-width:160px;">
             <div style="font-weight:900; font-size:18px;">
               $ {{ (p.base_price or 0) | int }}
             </div>
+
             <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px; flex-wrap:wrap;">
               <a class="btn-outline" href="/producto/{{ p['$id'] }}">Ver</a>
+
+              <form method="POST"
+                    action="/admin/products/{{ p.get('$id') }}/delete"
+                    onsubmit="return confirm('¿Eliminar este producto? Esta accion no se puede deshacer.');"
+                    style="display:inline;">
+                <button class="btn-outline" type="submit" style="border-color:#c0392b; color:#c0392b;">
+                  Eliminar
+                </button>
+              </form>
             </div>
           </div>
         </div>

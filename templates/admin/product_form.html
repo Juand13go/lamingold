@@ -42,8 +42,15 @@
         </div>
 
         <div class="auth-field">
-          <label>Categoria (slug) - ejemplo: pulseras, cadenas</label>
-          <input class="auth-input" name="category" type="text" required>
+          <label>Categoria</label>
+          <select class="input" name="category" required>
+            <option value="" disabled selected>Selecciona una categoria</option>
+            <option value="pulseras">Pulseras</option>
+            <option value="cadenas">Cadenas</option>
+            <option value="anillos">Anillos</option>
+            <option value="aretes">Aretes</option>
+          </select>
+        <div class="hint">Usa una categoria de la lista para mantener el catalogo ordenado.</div>
         </div>
 
         <div class="auth-field">

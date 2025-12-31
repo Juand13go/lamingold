@@ -304,3 +304,39 @@ def delete_product(product_id: str):
     if r.status_code >= 400:
         raise RuntimeError(r.text)
     return True
+
+def _delete_product_images_docs(product_id: str):
+    """
+    Borra los documentos en TABLE_PRODUCT_IMAGES donde product_id == product_id.
+    (No borra el archivo del bucket; solo el vínculo en la tabla)
+    """
+    product_id = (product_id or "").strip()
+    if not product_id:
+        return
+
+    docs = _list_all_documents(TABLE_PRODUCT_IMAGES, limit=100)
+
+    for d in docs:
+        pid = (d.get("product_id") or "").strip()
+        if pid == product_id:
+            doc_id = (d.get("$id") or "").strip()
+            if doc_id:
+                url = f"{_collection_base(TABLE_PRODUCT_IMAGES)}/{doc_id}"
+                r = requests.delete(url, headers=_headers(), timeout=20)
+                if r.status_code >= 400:
+                    raise RuntimeError(r.text)
+
+
+def delete_product_cascade(product_id: str):
+    """
+    Borra: (1) docs en product_images del producto, (2) producto.
+    """
+    product_id = (product_id or "").strip()
+    if not product_id:
+        raise ValueError("product_id requerido")
+
+    # 1) borrar links de imagen
+    _delete_product_images_docs(product_id)
+
+    # 2) borrar producto
+    return delete_product(product_id)
