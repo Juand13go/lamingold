@@ -1221,5 +1221,39 @@ body.dark .alert{
 .alert-error{ border-color: rgba(255,80,80,.35); }
 .alert-success{ border-color: rgba(80,255,160,.25); }
 
+/* ================================
+   HOME – CATEGORIAS SOLO TEXTO NEGRO
+================================ */
+
+/* Cards de categorias: todo negro */
+.card,
+.card *{
+  color: #0B0B0B;
+}
+
+/* Evitar azul/morado de links */
+.card:visited,
+.card:hover,
+.card:active,
+.card:focus{
+  color: #0B0B0B;
+}
+
+/* Texto secundario un poco mas suave */
+.card .muted{
+  color: rgba(11,11,11,.65);
+}
+
+/* Flecha */
+.card span{
+  color: #0B0B0B;
+}
+
+/* Hover: solo efecto visual, NO color */
+.card:hover{
+  background: rgba(212,175,55,.04);
+  border-color: rgba(212,175,55,.35);
+}
+
 
 .card-chip, .chip, .badge, .card-badge { display:none !important; }
